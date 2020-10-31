@@ -87,7 +87,7 @@ response=r.raise_for_status()
 
 ````python
 
-User-agent: *  ## '*'通配符代表所有
+User-agent: *  ## '*'通配符代表所有
 Disallow:/     ## '/'代表根目录
 ````
 

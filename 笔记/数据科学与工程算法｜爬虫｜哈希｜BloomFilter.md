@@ -58,5 +58,11 @@ FalsePositive与(高召回)
 
 ### Python实现BloomFilter
 
+详见bloomFilter.py
+
+[参考代码](https://github.com/cpselvis/zhihu-crawler/blob/master/bloom_filter.py)
+
+
+
 
 

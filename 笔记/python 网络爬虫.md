@@ -185,3 +185,127 @@ except:
 
 ### BeatifulSoup库的理解
 
+`<p class='title'>...</p>`属性域为了定义标签的特点。
+
+`from bs4 import BeatifulSoup`
+
+`import bs4`也可
+
+> html Document//标签树//Beautiful Soup类是等价的
+
+#### 解析器
+
+`lxml/xml: pip install lxml`;`html5lib: pip install html5lib`
+
+#### 基本元素
+
+`tag.name/attrs/string`
+
+```python
+>>> tag.attrs
+{'href': 'http://www.icourse163.org/course/BIT-268001', 'class': ['py1'], 'id': 'link1'}
+```
+
+`NavigableString`可以跨越多个标签层次。
+
+#### 遍历功能（遍历的时候想象标签🌲）
+
+`.contents||.children||.descendants||.parent`
+
+
+
+### 如何让html文件更加“友好”
+
+`print(soup.prettify())`
+
+对标签的prettify`print(soup.a.prettify())`
+
+bs4全部转换成了`utf-8`编码
+
+### 标签树型结构：遍历的深入
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkajn737xaj30x80g0h9l.jpg)
+
+#### 下行遍历
+
+- `.contents`儿子节点；返回列表
+- `.children`
+- `.descendants`
+
+```python
+>>> soup.body.contents
+['\n', <p class="title"><b>The demo python introduces several python courses.</b></p>, '\n', <p class="course">Python is a wonderful general-purpose programming language. You can learn Python from novice to professional by tracking the following courses:
+<a class="py1" href="http://www.icourse163.org/course/BIT-268001" id="link1">Basic Python</a> and <a class="py2" href="http://www.icourse163.org/course/BIT-1001870001" id="link2">Advanced Python</a>.</p>, '\n']
+>>> len(soup.body.contents)
+5
+```
+
+遍历儿子节点与遍历子孙节点：
+
+````python
+for child in soup.body.children:
+  print(child)  
+````
+
+#### 上行遍历
+
+#### 平行遍历
+
+必须发生在同一父节点下的各节点间。
+
+平行遍历获得节点未必一定是标签类型(Navigable String)
+
+#### soup变量中查找信息
+
+`<>.find_all(name,attrs,recursive,string)`
+
+查询多个标签`['a','b]`
+
+####find_all 检索
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkakgslbyaj30x80eqx33.jpg)
+
+`soup.find_all(string='Basic Python')`要求我们进行精确的输入才可以检索。
+
+> 使用正则表达式和find_all函数进行高效检索
+
+`find_all`简写：
+
+`<tag>(..)`等价于`<tag>.find_all(..)`;`<soup>(..)`等价于`<soup>.find_all(..)`;
+
+##### 扩展方法：检索区域和返回个数不同
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkakleia8xj30wi0fe15v.jpg)
+
+### 三种信息标记形式(XML||JSON||YAML的比较
+
+- XML:最早的信息标记语言，有强扩展性｜Internet上的信息交互与传递
+- JSON:有类型的信息方式，比较适合**程序处理(js)**｜程序对接口处理的地方常用JSON，比较大的缺陷在于无注释，无法通过增加注释的信息
+- YAML:各类系统的配置文件，文本信息比例最高，可读性好
+
+###  信息提取的一般方法
+
+#### 方法一:完整解析，再提取关键信息
+
+如bs4标签树的遍历
+
+#### 方法二：无视，然后直接采用搜索
+
+直接应用信息的文本查找函数即可。
+
+#### 即解析又搜索
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkakzu5z3ej30ta0ack5a.jpg)
+
+````python
+soup.find_all(string='Basic Python')
+['Basic Python']
+>>> for link in soup.find_all('a'):
+...     print(link.get('href'))
+...
+http://www.icourse163.org/course/BIT-268001
+http://www.icourse163.org/course/BIT-1001870001
+````
+
+
+

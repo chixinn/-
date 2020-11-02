@@ -307,5 +307,31 @@ http://www.icourse163.org/course/BIT-268001
 http://www.icourse163.org/course/BIT-1001870001
 ````
 
+## 中国大学排名爬取
 
+### 功能描述
+
+Input: 大学排名URL链接
+
+Output:排名信息的输出
+
+技术路线：`requests-bs4`
+
+爬虫类型：定向爬虫，即仅对输入URL进行爬取，而不进行拓展。
+
+查看是否提供robots.txt
+
+### 程序的结构设计
+
+爬信息；找到合适的存放信息的数据结构
+
+Python:二维列表。
+
+### 定义函数
+
+`def getHTMLText()`从网络上获取大学排名网页内容
+
+`def fillUnivList()`提取网页内容中信息到合适的数据结构
+
+`def printUnivList()`利用数据结构展示并输出结果
 

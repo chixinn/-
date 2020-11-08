@@ -333,5 +333,85 @@ Python:二维列表。
 
 `def fillUnivList()`提取网页内容中信息到合适的数据结构
 
-`def printUnivList()`利用数据结构展示并输出结果
+`def printUnivList()`利用数据结构展示并输出结果
 
+## 正则表达式Regular Expression//regex (RE)
+
+> 简介表达一组本应该列出来的字符串
+
+- 表达文本类型的特征(病毒、入侵)
+- 同时查找或替换一组字符串
+- 匹配字符串的全部或部分
+
+> 主要是匹配
+
+### 使用
+
+编译：将符合正则表达式语法的字符串转换成正则表达式特征
+
+### 语法
+
+字符+操作符=正则表达式
+
+- `.`：任何单个字符
+- `[]`: 字符集，对**单个字符**给出取值范围
+- `[^]`：对**单个字符**给出排除范围
+- `*`: 0次到无限次扩展
+- `+`：1次或无限次
+- `?`：0次或1次
+- `|`：左右表达式任意一个
+- `{m}`:前一个m次
+- `{m,n}`:前一个m至n次
+- `^`:开头
+- `$`:结尾m次
+- `()`:分组标记
+- `\d`:数字，等价于[0-9]
+- `\w`：单词字符
+
+### 实例
+
+`^[A-Za-z]+$`：由26个字母组成的字符串
+
+`^-?\d+$`:  整数形式的字符串
+
+#### 匹配IP地址的正则表达式
+
+0-99:`[1-9]?\d`;
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkbudupclpj30ve0fsqgl.jpg)
+
+### RE库的基本使用
+
+`r'text'`
+
+Raw string是指不包含转义符的字符串
+
+> 当正则表达式包含转义符时，用raw string类型
+
+`re.search()`;
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkbuilgge6j30ve0e67g5.jpg)
+
+### RE库的贪婪匹配与最小匹配
+
+````python
+>>> match =re.search(r'PY.*N','PYANBNCNDN')
+>>> match.group(0)
+````
+
+> Re库默认采用贪婪匹配，即输出匹配最长的。
+
+那么我们如何输出最短的？
+
+```python
+>>> match =re.search(r'PY.*?N','PYANBNCNDN')
+>>> match.group(0)
+```
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkbvc267yxj30mq0ao7au.jpg)
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkbvhgftkcj30mq0ao44z.jpg)
+
+match对象只包含一次匹配的结果，如果想得到每一次，则需要finditer()函数。
+
+![](https://tva1.sinaimg.cn/large/0081Kckwly1gkbvlxb981j30u00ao43r.jpg)
